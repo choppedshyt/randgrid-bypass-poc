@@ -3,7 +3,9 @@
 <img width="447" height="447" alt="image" src="https://github.com/user-attachments/assets/fd8a4dde-ef72-49b8-8e07-5e7de946a1f0" />
 
 
+THIS WILL ONLY WORK ON SEASON 2 RELOADED of MWIII feel free to pr support to other titles (CORTEZ, CER, SAT)
 
+https://drive.google.com/file/d/1t_rTaO35hiX_0YffMH65BkEn00We_TWn/view?usp=sharing
 
 ### Required for the native C++/MASM integration
 
