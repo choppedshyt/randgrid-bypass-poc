@@ -1,0 +1,17 @@
+--- a/game.cpp
++++ b/game.cpp
+@@ -155,13 +155,9 @@
+     MessageBoxW_hook.create({}, "user32.dll", "MessageBoxW", MessageBoxW_stub);
+     console::print(std::format("startup: MessageBoxW original={}", MessageBoxW_hook.get_original()),
+         !MessageBoxW_hook.get_original());
+ 
+-    console::print("startup: BEGIN existing process cleanup");
+-    KillProcessByName(L"codCrashHandler.exe");
+-    KillProcessByName(L"cod.exe");
+-    KillProcessByName(L"cod23-cod.exe");
+-    console::print("startup: RETURN existing process cleanup");
++    console::print("startup: process cleanup skipped; other running processes are left unchanged");
+ 
+     //auth::Component_Load();
+     run_startup_stage("Steam import setup", steam::Component_Load);
+ 

@@ -1,0 +1,7 @@
+{
+  "pid": 4524,
+  "exit": 0,
+  "stdout": "CASE 0 status=C0000034 original=0 enabled=1 route=10 result=1 PASS=1\r\nCASE 1 status=C0000034 original=0 enabled=0 route=20 result=0 PASS=1\r\nCASE 2 status=C0000034 original=1 enabled=1 route=10 result=1 PASS=1\r\nCASE 3 status=00000000 original=0 enabled=1 route=20 result=0 PASS=1\r\nCASE 4 status=00000000 original=1 enabled=1 route=10 result=1 PASS=1\r\nCASE 5 status=C0000022 original=0 enabled=1 route=20 result=0 PASS=1\r\nCASE 6 status=C0000005 original=0 enabled=1 route=20 result=0 PASS=1\r\nCASE 7 status=C0000034 original=0 enabled=2 route=20 result=0 PASS=1\r\nCASE 8 status=00000001 original=2 enabled=1 route=10 result=2 PASS=1\r\nWORKER_POLICY_9_CASES_AND_16_REPEAT_INVOCATIONS_PASS_NO_API_HELPER\r\n",
+  "stderr": "",
+  "assembly_sha256": "f8d2958cbd6c2ea65a39902b3414276a386c76dd21f1b627d76d6f610bf0a692"
+}

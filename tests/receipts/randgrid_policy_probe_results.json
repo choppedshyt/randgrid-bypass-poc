@@ -1,0 +1,9 @@
+{
+  "created_utc": "2026-11-17T21:11:12.909170+00:00",
+  "pid": 21932,
+  "exit": 0,
+  "stdout": "CASE 0 status=C0000034 enabled=1 r13=0 route=30 PASS=1\r\nCASE 1 status=C0000034 enabled=0 r13=0 route=20 PASS=1\r\nCASE 2 status=C0000034 enabled=1 r13=1 route=20 PASS=1\r\nCASE 3 status=00000000 enabled=1 r13=0 route=10 PASS=1\r\nCASE 4 status=40000000 enabled=1 r13=0 route=10 PASS=1\r\nCASE 5 status=7FFFFFFF enabled=1 r13=0 route=10 PASS=1\r\nCASE 6 status=80000000 enabled=1 r13=0 route=20 PASS=1\r\nCASE 7 status=C0000022 enabled=1 r13=0 route=20 PASS=1\r\nCASE 8 status=C0000005 enabled=1 r13=0 route=20 PASS=1\r\nCASE 9 status=FFFFFFFF enabled=1 r13=0 route=20 PASS=1\r\nCASE 10 status=C0000034 enabled=2 r13=0 route=20 PASS=1\r\nCASE 11 status=00000001 enabled=0 r13=0 route=10 PASS=1\r\nRANDGRID_OFFLINE_POLICY_12_CASES_PASS\r\n",
+  "stderr": "",
+  "exe_sha256": "ee5ca3da5c41e2df86bae5e131397869b3cd7331a5fd7c9f2493bc5553b4129a",
+  "assembly_sha256": "4b1e9748f96f5bbe7b2bb35b40af6520a1ead449cd8df9fb5fa645d14c01bb24"
+}

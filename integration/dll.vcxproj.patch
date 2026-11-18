@@ -1,0 +1,61 @@
+--- a/dll.vcxproj
++++ b/dll.vcxproj
+@@ -1,4 +1,4 @@
+-<?xml version="1.0" encoding="utf-8"?>
++<?xml version='1.0' encoding='utf-8'?>
+ <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+   <ItemGroup Label="ProjectConfigurations">
+     <ProjectConfiguration Include="Debug|Win32">
+@@ -54,8 +54,8 @@
+     <CharacterSet>Unicode</CharacterSet>
+   </PropertyGroup>
+   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+-  <ImportGroup Label="ExtensionSettings"></ImportGroup>
+-  <ImportGroup Label="Shared"></ImportGroup>
++  <ImportGroup Label="ExtensionSettings"><Import Project="$(VCTargetsPath)\BuildCustomizations\masm.props" Condition="'$(Platform)'=='x64'" /></ImportGroup>
++  <ImportGroup Label="Shared" />
+   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+   </ImportGroup>
+@@ -77,9 +77,7 @@
+     <OutDir>$(OutDir)</OutDir>
+     <TargetName>XInput9_1_0</TargetName>
+   </PropertyGroup>
+-  <!-- PID29840 loaded the game's MSVCP140 14.28: its mutex implementation
+-       requires _Mtx_init_in_situ instead of the newer constexpr layout.
+-       Keep this definition consistent across every translation unit. -->
++  
+   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+     <ClCompile>
+       <WarningLevel>Level3</WarningLevel>
+@@ -122,7 +120,7 @@
+       <OutputFile>$(OutDir)DLL\XInput9_1_0.dll</OutputFile>
+       <AdditionalDependencies>$(CoreLibraryDependencies);discord_game_sdk.dll.lib;%(AdditionalDependencies)</AdditionalDependencies>
+     </Link>
+-    <PreBuildEvent>
++    <PreBuildEvent Condition="'$(PreserveGeneratedInputs)'!='true'">
+       <Command>powershell -ExecutionPolicy Bypass -File "$(ProjectDir)generate_build_time.ps1"</Command>
+     </PreBuildEvent>
+   </ItemDefinitionGroup>
+@@ -144,7 +142,7 @@
+       <OutputFile>$(OutDir)DLL\XInput9_1_0.dll</OutputFile>
+       <AdditionalDependencies>$(CoreLibraryDependencies);discord_game_sdk.dll.lib;%(AdditionalDependencies)</AdditionalDependencies>
+     </Link>
+-    <PreBuildEvent>
++    <PreBuildEvent Condition="'$(PreserveGeneratedInputs)'!='true'">
+       <Command>powershell -ExecutionPolicy Bypass -File "$(ProjectDir)generate_build_time.ps1"</Command>
+     </PreBuildEvent>
+   </ItemDefinitionGroup>
+@@ -608,9 +606,9 @@
+   <Target Name="BuildMasteryCamosRust" BeforeTargets="Link" Condition="'$(Platform)'=='x64'">
+     <Exec Command="cargo build --manifest-path &quot;$(MasteryCamosManifest)&quot; --target-dir &quot;$(MasteryCamosTargetDir)&quot; --target x86_64-pc-windows-msvc --release --locked --offline" />
+   </Target>
+-  <ImportGroup Label="ExtensionTargets"></ImportGroup>
+-  <ItemGroup></ItemGroup>
++  <ImportGroup Label="ExtensionTargets"><Import Project="$(VCTargetsPath)\BuildCustomizations\masm.targets" Condition="'$(Platform)'=='x64'" /></ImportGroup>
++  <ItemGroup />
+   <ItemGroup>
+     <ClInclude Include="lan_game_bindings.hpp" />
+   </ItemGroup>
+-</Project>
++<ItemGroup Condition="'$(Platform)'=='x64'"><MASM Include="diagnostics\offline_startup\randgrid_offline.asm"><ObjectFileName>$(IntDir)randgrid_offline.obj</ObjectFileName></MASM><MASM Include="diagnostics\offline_startup\randgrid_worker.asm"><ObjectFileName>$(IntDir)randgrid_worker.obj</ObjectFileName></MASM><MASM Include="diagnostics\offline_startup\randgrid_match.asm"><ObjectFileName>$(IntDir)randgrid_match.obj</ObjectFileName></MASM></ItemGroup><ItemGroup><ClInclude Include="diagnostics\offline_startup\randgrid_offline_state.hpp" /><ClInclude Include="diagnostics\offline_startup\randgrid_worker.inl" /><ClInclude Include="diagnostics\offline_startup\randgrid_offline.inl" /><ClInclude Include="diagnostics\offline_startup\postmap_gate.inl" /><ClInclude Include="diagnostics\offline_startup\randgrid_match.inl" /></ItemGroup></Project>

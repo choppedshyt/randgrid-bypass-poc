@@ -1,0 +1,6 @@
+{
+  "pid": 20080,
+  "exit": 0,
+  "stdout": "CASE 0 status=C0000034 enabled=1 r13=0 route=30 PASS=1\r\nCASE 1 status=C0000034 enabled=0 r13=0 route=20 PASS=1\r\nCASE 2 status=C0000034 enabled=1 r13=1 route=20 PASS=1\r\nCASE 3 status=00000000 enabled=1 r13=0 route=10 PASS=1\r\nCASE 4 status=40000000 enabled=1 r13=0 route=10 PASS=1\r\nCASE 5 status=7FFFFFFF enabled=1 r13=0 route=10 PASS=1\r\nCASE 6 status=80000000 enabled=1 r13=0 route=20 PASS=1\r\nCASE 7 status=C0000022 enabled=1 r13=0 route=20 PASS=1\r\nCASE 8 status=C0000005 enabled=1 r13=0 route=20 PASS=1\r\nCASE 9 status=FFFFFFFF enabled=1 r13=0 route=20 PASS=1\r\nCASE 10 status=C0000034 enabled=2 r13=0 route=20 PASS=1\r\nCASE 11 status=00000001 enabled=0 r13=0 route=10 PASS=1\r\nRESTORATION_FAILURE_RETAINS_NATIVE_FAILURE_PASS\r\nRANDGRID_OFFLINE_POLICY_12_CASES_PASS\r\n",
+  "stderr": ""
+}

@@ -1,0 +1,9 @@
+* text=auto
+*.asm text eol=lf
+*.cpp text eol=lf
+*.hpp text eol=lf
+*.inl text eol=lf
+*.py text eol=lf
+*.md text eol=lf
+*.json text eol=lf
+*.patch text eol=lf -whitespace

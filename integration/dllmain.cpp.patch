@@ -1,0 +1,59 @@
+--- a/dllmain.cpp
++++ b/dllmain.cpp
+@@ -8,23 +8,17 @@
+ #include "diagnostics/crash_log.hpp"
+ #include "diagnostics/termination_guard.hpp"
+ 
+-DWORD WINAPI MainThread(void* parameter)
++DWORD WINAPI OriginalBootstrap(void* parameter)
+ {
+ 	console::init_startup_log(static_cast<HMODULE>(parameter));
+ 	const auto crash_logger_ready = crash_log::initialize(static_cast<HMODULE>(parameter));
+-	// Install before console/proxy DLL loads and before the first CreateFileA stage.
+-	const auto exit_guard = termination_guard::initialize();
++	// Native termination remains unchanged; repair the dependency decision instead.
+ 	console::print("startup: DLL version=" NINEEX_VERSION_STRING);
+ 	console::print("startup: bootstrap worker entered; DLL_PROCESS_ATTACH was received");
+ 	// Initialize console and file output outside DllMain's loader lock.
+ 	console::init(NINEEX_VERSION_NAME);
+ 	crash_log::attach_console();
+-	console::print(exit_guard == termination_guard::install_result::active
+-		? "startup: offline exit guard active; NtTerminateProcess(-1, 0) swallowed before normal shutdown"
+-		: exit_guard == termination_guard::install_result::disabled
+-			? "startup: offline exit guard disabled by environment"
+-			: "startup: offline exit guard unavailable; original termination behavior retained",
+-		exit_guard == termination_guard::install_result::failed);
++	console::print("startup: native process termination retained; zero-exit swallowing is disabled");
+ 	console::print(crash_logger_ready
+ 		? "startup: crash diagnostics enabled; native faults print [CRASH-DIAG] and append .NineEx/logs/crash-<pid>.log"
+ 		: "startup: crash diagnostic handler registration failed", !crash_logger_ready);
+@@ -51,6 +45,29 @@
+ }
+ 
+ 
++
++#include "diagnostics/offline_startup/randgrid_worker.inl"
++#include "diagnostics/offline_startup/randgrid_match.inl"
++#include "diagnostics/offline_startup/randgrid_offline.inl"
++#include "diagnostics/offline_startup/postmap_gate.inl"
++
++DWORD WINAPI MainThread(void* parameter)
++{
++    wchar_t setting[4]{};
++    const auto count = GetEnvironmentVariableW(L"NINEEX_POSTMAP_BOOTSTRAP", setting, _countof(setting));
++    const bool restored_image_bootstrap = count == 0 || (count == 1 && setting[0] == L'1');
++    if (restored_image_bootstrap)
++    {
++        console::init_startup_log(static_cast<HMODULE>(parameter));
++        crash_log::initialize(static_cast<HMODULE>(parameter));
++        const bool ready = postmap_gate::initialize(static_cast<HMODULE>(parameter), OriginalBootstrap);
++        console::print(ready ? "post-map gate: armed; optional bootstrap waits for native image restoration"
++                            : "post-map gate: unavailable; optional bootstrap not executed", !ready);
++        return ready ? 0 : 95;
++    }
++    return OriginalBootstrap(parameter);
++}
++
+ BOOL APIENTRY DllMain(HMODULE hModule, DWORD reason, LPVOID lpReserved)
+ {
+ 	if (reason == DLL_PROCESS_DETACH)
