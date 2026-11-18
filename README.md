@@ -5,6 +5,8 @@
 
 THIS WILL ONLY WORK ON SEASON 2 RELOADED of MWIII feel free to pr support to other titles (CORTEZ, CER, SAT)
 
+stripped [game.cpp and dllmain.cpp integration examples](examples/README.md)
+
 https://drive.google.com/file/d/1t_rTaO35hiX_0YffMH65BkEn00We_TWn/view?usp=sharing
 
 ### Required for the native C++/MASM integration
